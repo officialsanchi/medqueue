@@ -1,0 +1,357 @@
+{
+    "checksum": "e27d14c919b66be9901e26febb9125e5f82d9e7c549cd7314d630a16ce0afe18",
+    "data": {
+    "id": "c66aacfa-366e-42f8-9173-4f26674f5606",
+    "createdAt": 1753873170238,
+    "updatedAt": 1753873181426,
+    "title": "Java Optional Handling Fix",
+    "messages": [
+        {
+            "id": "789c8e76-8880-4044-afdf-9ee0855956d2",
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "fix"
+                },
+                {
+                    "type": "codeSnippet",
+                    "text": " else if (Validations.isValidPhone(username)) {\n    userOptional = userRepository.findByPhoneNumber(username);\n} else {\n"
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                    "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "package com.example.MedQueue.auth.service.implementation;\r\n\r\nimport com.example.MedQueue.auth.dtos.request.LoginRequest;\r\nimport com.example.MedQueue.auth.enums.Role;\r\nimport com.example.MedQueue.auth.models.AppUser;\r\nimport com.example.MedQueue.auth.repo.AppUsersRepository;\r\nimport com.example.MedQueue.auth.service.interfaces.AppUserService;\r\nimport com.example.MedQueue.auth.util.Validations;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.Optional;\r\nimport java.util.Set;\r\n\r\n@Service\r\n\r\n\r\npublic class AppUserServiceImpl  implements AppUserService {\r\n\r\n    public AppUserServiceImpl(AppUsersRepository userRepository,\r\n                              PasswordEncoder passwordEncoder) {\r\n        this.userRepository = userRepository;\r\n        this.passwordEncoder = passwordEncoder;\r\n    }\r\n\r\n    private final AppUsersRepository userRepository;\r\n    private final PasswordEncoder passwordEncoder;\r\n\r\n\r\n    @Override\r\n    public AppUser registerUser(String fullName, String email, String phoneNumber, String password, Role role) {\r\n        validateEmailAndPhone(email, phoneNumber);\r\n        String emailCheck = emailExists(email);\r\n        if (emailCheck != null) {\r\n            throw new IllegalArgumentException(emailCheck);\r\n        }\r\n        String phoneCheck = phoneNumberExists(phoneNumber);\r\n        if (phoneCheck != null) {\r\n            throw new IllegalArgumentException(phoneCheck);\r\n        }\r\n        AppUser user = new AppUser();\r\n        user.setFullName( fullName );\r\n        user.setEmail( email );\r\n        user.setPhoneNumber( phoneNumber );\r\n        user.setPassword( passwordEncoder.encode( password ) );\r\n        user.setRoles( Set.of( role ) );\r\n        return userRepository.save( user );\r\n    }\r\n    private void validateEmailAndPhone(String email, String phoneNumber) {\r\n        if (!Validations.isValidEmail( email )) {\r\n            throw new IllegalArgumentException(\"Invalid email format.\");\r\n        }\r\n        if (!Validations.isValidPhone(phoneNumber)) {\r\n            throw new IllegalArgumentException(\"Invalid phone number format.\");\r\n        }\r\n        System.out.println(\"Email and phone number are valid.\");\r\n    }\r\n    private String emailExists(String email) {\r\n        Optional<AppUser> emailTaken = userRepository.findByEmail(email);\r\n        if (emailTaken.isPresent()) {\r\n            return \"Email already exists.\";\r\n        }\r\n        return null;\r\n    }\r\n    private String phoneNumberExists(String phoneNumber) {\r\n        Optional<AppUser> phoneNumberTaken = userRepository.findByPhoneNumber(phoneNumber);\r\n        if (phoneNumberTaken) {\r\n            return \"Phone number already exists.\";\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public AppUser login(String username, String password) {\r\n        if (Validations.isValidEmail(username)) {\r\n            userOptional = userRepository.findByEmail(username);\r\n        } else if (Validations.isValidPhone(username)) {\r\n            userOptional = userRepository.findByPhoneNumber(username);\r\n        } else {\r\n            throw new IllegalArgumentException(\"Invalid email or phone number format.\");\r\n        }\r\n\r\n        AppUser user = userOptional.orElseThrow(() ->\r\n                new IllegalArgumentException(\"User not found with provided email or phone number.\")\r\n        );\r\n\r\n        // Password check\r\n        if (!passwordEncoder.matches(password, user.getPassword())) {\r\n            throw new IllegalArgumentException(\"Invalid password.\");\r\n        }\r\n\r\n        // Return user or generate JWT\r\n        return user;\r\n    }\r\n\r\n    }\r\n\r\n}\r\n\r\n"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUsersRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/util/Validations.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/LoginRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\LoginRequest.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/AppSecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\AppSecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUsersRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/util/Validations.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/LoginRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\LoginRequest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "rerankedFiles": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java"
+                    }
+                ],
+                "usedFilePaths": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ],
+                        "content": "package com.example.MedQueue.auth.service.implementation;\r\n\r\nimport com.example.MedQueue.auth.dtos.request.LoginRequest;\r\nimport com.example.MedQueue.auth.enums.Role;\r\nimport com.example.MedQueue.auth.models.AppUser;\r\nimport com.example.MedQueue.auth.repo.AppUsersRepository;\r\nimport com.example.MedQueue.auth.service.interfaces.AppUserService;\r\nimport com.example.MedQueue.auth.util.Validations;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.Optional;\r\nimport java.util.Set;\r\n\r\n@Service\r\n\r\n\r\npublic class AppUserServiceImpl  implements AppUserService {\r\n\r\n    public AppUserServiceImpl(AppUsersRepository userRepository,\r\n                              PasswordEncoder passwordEncoder) {\r\n        this.userRepository = userRepository;\r\n        this.passwordEncoder = passwordEncoder;\r\n    }\r\n\r\n    private final AppUsersRepository userRepository;\r\n    private final PasswordEncoder passwordEncoder;\r\n\r\n\r\n    @Override\r\n    public AppUser registerUser(String fullName, String email, String phoneNumber, String password, Role role) {\r\n        validateEmailAndPhone(email, phoneNumber);\r\n        String emailCheck = emailExists(email);\r\n        if (emailCheck != null) {\r\n            throw new IllegalArgumentException(emailCheck);\r\n        }\r\n        String phoneCheck = phoneNumberExists(phoneNumber);\r\n        if (phoneCheck != null) {\r\n            throw new IllegalArgumentException(phoneCheck);\r\n        }\r\n        AppUser user = new AppUser();\r\n        user.setFullName( fullName );\r\n        user.setEmail( email );\r\n        user.setPhoneNumber( phoneNumber );\r\n        user.setPassword( passwordEncoder.encode( password ) );\r\n        user.setRoles( Set.of( role ) );\r\n        return userRepository.save( user );\r\n    }\r\n    private void validateEmailAndPhone(String email, String phoneNumber) {\r\n        if (!Validations.isValidEmail( email )) {\r\n            throw new IllegalArgumentException(\"Invalid email format.\");\r\n        }\r\n        if (!Validations.isValidPhone(phoneNumber)) {\r\n            throw new IllegalArgumentException(\"Invalid phone number format.\");\r\n        }\r\n        System.out.println(\"Email and phone number are valid.\");\r\n    }\r\n    private String emailExists(String email) {\r\n        Optional<AppUser> emailTaken = userRepository.findByEmail(email);\r\n        if (emailTaken.isPresent()) {\r\n            return \"Email already exists.\";\r\n        }\r\n        return null;\r\n    }\r\n    private String phoneNumberExists(String phoneNumber) {\r\n        Optional<AppUser> phoneNumberTaken = userRepository.findByPhoneNumber(phoneNumber);\r\n        if (phoneNumberTaken) {\r\n            return \"Phone number already exists.\";\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public AppUser login(String username, String password) {\r\n        if (Validations.isValidEmail(username)) {\r\n            userOptional = userRepository.findByEmail(username);\r\n        } else if (Validations.isValidPhone(username)) {\r\n            userOptional = userRepository.findByPhoneNumber(username);\r\n        } else {\r\n            throw new IllegalArgumentException(\"Invalid email or phone number format.\");\r\n        }\r\n\r\n        AppUser user = userOptional.orElseThrow(() ->\r\n                new IllegalArgumentException(\"User not found with provided email or phone number.\")\r\n        );\r\n\r\n        // Password check\r\n        if (!passwordEncoder.matches(password, user.getPassword())) {\r\n            throw new IllegalArgumentException(\"Invalid password.\");\r\n        }\r\n\r\n        // Return user or generate JWT\r\n        return user;\r\n    }\r\n\r\n    }\r\n\r\n}\r\n\r\n"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java"
+                    }
+                ]
+            },
+            "createdAt": 1753873170255,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "fix"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "codeBlock",
+                        "attrs": {
+                            "language": null
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": " else if (Validations.isValidPhone(username)) {\n    userOptional = userRepository.findByPhoneNumber(username);\n} else {\n"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "d25d08a7-687d-4943-8cca-1f434fb57ad6",
+            "role": "assistant",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "The issue in your code snippet is related to the use of `userRepository.findByPhoneNumber(username)`. The method `findByPhoneNumber` in your `AppUsersRepository` returns an `Optional<AppUser>`, but in your `phoneNumberExists` method, you are treating it as if it returns a `boolean`. \n\nHere's how you can fix the code:\n\n1. Ensure that `findByPhoneNumber` returns an `Optional<AppUser>` as it should, based on your repository interface.\n2. Update the `phoneNumberExists` method to correctly handle the `Optional<AppUser>`.\n\nHere's the corrected code for the `phoneNumberExists` method:\n\n```java\nprivate String phoneNumberExists(String phoneNumber) {\n    Optional<AppUser> phoneNumberTaken = userRepository.findByPhoneNumber(phoneNumber);\n    if (phoneNumberTaken.isPresent()) {\n        return \"Phone number already exists.\";\n    }\n    return null;\n}\n```\n\nAnd ensure your `login` method uses `Optional<AppUser>` correctly:\n\n```java\npublic AppUser login(String username, String password) {\n    Optional<AppUser> userOptional;\n    if (Validations.isValidEmail(username)) {\n        userOptional = userRepository.findByEmail(username);\n    } else if (Validations.isValidPhone(username)) {\n        userOptional = userRepository.findByPhoneNumber(username);\n    } else {\n        throw new IllegalArgumentException(\"Invalid email or phone number format.\");\n    }\n\n    AppUser user = userOptional.orElseThrow(() ->\n            new IllegalArgumentException(\"User not found with provided email or phone number.\")\n    );\n\n    if (!passwordEncoder.matches(password, user.getPassword())) {\n        throw new IllegalArgumentException(\"Invalid password.\");\n    }\n\n    return user;\n}\n```\n\nThis should resolve the issue with the `else if` block and ensure that your `login` method works correctly with the `Optional` type."
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                    "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "package com.example.MedQueue.auth.service.implementation;\r\n\r\nimport com.example.MedQueue.auth.dtos.request.LoginRequest;\r\nimport com.example.MedQueue.auth.enums.Role;\r\nimport com.example.MedQueue.auth.models.AppUser;\r\nimport com.example.MedQueue.auth.repo.AppUsersRepository;\r\nimport com.example.MedQueue.auth.service.interfaces.AppUserService;\r\nimport com.example.MedQueue.auth.util.Validations;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.Optional;\r\nimport java.util.Set;\r\n\r\n@Service\r\n\r\n\r\npublic class AppUserServiceImpl  implements AppUserService {\r\n\r\n    public AppUserServiceImpl(AppUsersRepository userRepository,\r\n                              PasswordEncoder passwordEncoder) {\r\n        this.userRepository = userRepository;\r\n        this.passwordEncoder = passwordEncoder;\r\n    }\r\n\r\n    private final AppUsersRepository userRepository;\r\n    private final PasswordEncoder passwordEncoder;\r\n\r\n\r\n    @Override\r\n    public AppUser registerUser(String fullName, String email, String phoneNumber, String password, Role role) {\r\n        validateEmailAndPhone(email, phoneNumber);\r\n        String emailCheck = emailExists(email);\r\n        if (emailCheck != null) {\r\n            throw new IllegalArgumentException(emailCheck);\r\n        }\r\n        String phoneCheck = phoneNumberExists(phoneNumber);\r\n        if (phoneCheck != null) {\r\n            throw new IllegalArgumentException(phoneCheck);\r\n        }\r\n        AppUser user = new AppUser();\r\n        user.setFullName( fullName );\r\n        user.setEmail( email );\r\n        user.setPhoneNumber( phoneNumber );\r\n        user.setPassword( passwordEncoder.encode( password ) );\r\n        user.setRoles( Set.of( role ) );\r\n        return userRepository.save( user );\r\n    }\r\n    private void validateEmailAndPhone(String email, String phoneNumber) {\r\n        if (!Validations.isValidEmail( email )) {\r\n            throw new IllegalArgumentException(\"Invalid email format.\");\r\n        }\r\n        if (!Validations.isValidPhone(phoneNumber)) {\r\n            throw new IllegalArgumentException(\"Invalid phone number format.\");\r\n        }\r\n        System.out.println(\"Email and phone number are valid.\");\r\n    }\r\n    private String emailExists(String email) {\r\n        Optional<AppUser> emailTaken = userRepository.findByEmail(email);\r\n        if (emailTaken.isPresent()) {\r\n            return \"Email already exists.\";\r\n        }\r\n        return null;\r\n    }\r\n    private String phoneNumberExists(String phoneNumber) {\r\n        Optional<AppUser> phoneNumberTaken = userRepository.findByPhoneNumber(phoneNumber);\r\n        if (phoneNumberTaken) {\r\n            return \"Phone number already exists.\";\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public AppUser login(String username, String password) {\r\n        if (Validations.isValidEmail(username)) {\r\n            userOptional = userRepository.findByEmail(username);\r\n        } else if (Validations.isValidPhone(username)) {\r\n            userOptional = userRepository.findByPhoneNumber(username);\r\n        } else {\r\n            throw new IllegalArgumentException(\"Invalid email or phone number format.\");\r\n        }\r\n\r\n        AppUser user = userOptional.orElseThrow(() ->\r\n                new IllegalArgumentException(\"User not found with provided email or phone number.\")\r\n        );\r\n\r\n        // Password check\r\n        if (!passwordEncoder.matches(password, user.getPassword())) {\r\n            throw new IllegalArgumentException(\"Invalid password.\");\r\n        }\r\n\r\n        // Return user or generate JWT\r\n        return user;\r\n    }\r\n\r\n    }\r\n\r\n}\r\n\r\n"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUsersRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/util/Validations.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/LoginRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\LoginRequest.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/AppSecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\AppSecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUsersRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/util/Validations.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/LoginRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\LoginRequest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "rerankedFiles": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java"
+                    }
+                ],
+                "usedFilePaths": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ],
+                        "content": "package com.example.MedQueue.auth.service.implementation;\r\n\r\nimport com.example.MedQueue.auth.dtos.request.LoginRequest;\r\nimport com.example.MedQueue.auth.enums.Role;\r\nimport com.example.MedQueue.auth.models.AppUser;\r\nimport com.example.MedQueue.auth.repo.AppUsersRepository;\r\nimport com.example.MedQueue.auth.service.interfaces.AppUserService;\r\nimport com.example.MedQueue.auth.util.Validations;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.Optional;\r\nimport java.util.Set;\r\n\r\n@Service\r\n\r\n\r\npublic class AppUserServiceImpl  implements AppUserService {\r\n\r\n    public AppUserServiceImpl(AppUsersRepository userRepository,\r\n                              PasswordEncoder passwordEncoder) {\r\n        this.userRepository = userRepository;\r\n        this.passwordEncoder = passwordEncoder;\r\n    }\r\n\r\n    private final AppUsersRepository userRepository;\r\n    private final PasswordEncoder passwordEncoder;\r\n\r\n\r\n    @Override\r\n    public AppUser registerUser(String fullName, String email, String phoneNumber, String password, Role role) {\r\n        validateEmailAndPhone(email, phoneNumber);\r\n        String emailCheck = emailExists(email);\r\n        if (emailCheck != null) {\r\n            throw new IllegalArgumentException(emailCheck);\r\n        }\r\n        String phoneCheck = phoneNumberExists(phoneNumber);\r\n        if (phoneCheck != null) {\r\n            throw new IllegalArgumentException(phoneCheck);\r\n        }\r\n        AppUser user = new AppUser();\r\n        user.setFullName( fullName );\r\n        user.setEmail( email );\r\n        user.setPhoneNumber( phoneNumber );\r\n        user.setPassword( passwordEncoder.encode( password ) );\r\n        user.setRoles( Set.of( role ) );\r\n        return userRepository.save( user );\r\n    }\r\n    private void validateEmailAndPhone(String email, String phoneNumber) {\r\n        if (!Validations.isValidEmail( email )) {\r\n            throw new IllegalArgumentException(\"Invalid email format.\");\r\n        }\r\n        if (!Validations.isValidPhone(phoneNumber)) {\r\n            throw new IllegalArgumentException(\"Invalid phone number format.\");\r\n        }\r\n        System.out.println(\"Email and phone number are valid.\");\r\n    }\r\n    private String emailExists(String email) {\r\n        Optional<AppUser> emailTaken = userRepository.findByEmail(email);\r\n        if (emailTaken.isPresent()) {\r\n            return \"Email already exists.\";\r\n        }\r\n        return null;\r\n    }\r\n    private String phoneNumberExists(String phoneNumber) {\r\n        Optional<AppUser> phoneNumberTaken = userRepository.findByPhoneNumber(phoneNumber);\r\n        if (phoneNumberTaken) {\r\n            return \"Phone number already exists.\";\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public AppUser login(String username, String password) {\r\n        if (Validations.isValidEmail(username)) {\r\n            userOptional = userRepository.findByEmail(username);\r\n        } else if (Validations.isValidPhone(username)) {\r\n            userOptional = userRepository.findByPhoneNumber(username);\r\n        } else {\r\n            throw new IllegalArgumentException(\"Invalid email or phone number format.\");\r\n        }\r\n\r\n        AppUser user = userOptional.orElseThrow(() ->\r\n                new IllegalArgumentException(\"User not found with provided email or phone number.\")\r\n        );\r\n\r\n        // Password check\r\n        if (!passwordEncoder.matches(password, user.getPassword())) {\r\n            throw new IllegalArgumentException(\"Invalid password.\");\r\n        }\r\n\r\n        // Return user or generate JWT\r\n        return user;\r\n    }\r\n\r\n    }\r\n\r\n}\r\n\r\n"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUsersRepository.java"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\util\\Validations.java"
+                    }
+                ]
+            },
+            "createdAt": 1753873181426,
+            "isInternal": false
+        }
+    ],
+    "isAgent": false,
+    "isNameGenerated": true,
+    "isCustomAgent": false,
+    "isUnitTestsAgent": false,
+    "isE2EAgent": false,
+    "autoApply": false
+}
+}

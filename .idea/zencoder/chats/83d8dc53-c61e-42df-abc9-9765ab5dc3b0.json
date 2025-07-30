@@ -1,0 +1,100 @@
+{
+    "checksum": "aa232e2f55d3c9f737fa7e871e6fb41ba2e5f60d7b799c69ad90f45ea53d28a8",
+    "data": {
+    "id": "83d8dc53-c61e-42df-abc9-9765ab5dc3b0",
+    "createdAt": 1753836135951,
+    "updatedAt": 1753836136991,
+    "title": "/fix (RegisterRequest , Role) Expression expected",
+    "messages": [
+        {
+            "id": "ffe12aa5-adc7-458d-950a-df738a2507ad",
+            "role": "user",
+            "content": [
+                {
+                    "type": "command",
+                    "commandName": "fix"
+                },
+                {
+                    "type": "codeSnippet",
+                    "text": "(RegisterRequest , Role)",
+                    "language": "java"
+                },
+                {
+                    "type": "text",
+                    "text": "Expression expected"
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                    "fsPath": "C:/Users/DELL/Desktop/javaProject/MedQueue/MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                    "content": "package com.example.MedQueue.auth.controller;\n\nimport com.example.MedQueue.auth.dtos.request.LoginRequest;\nimport com.example.MedQueue.auth.dtos.request.RegisterRequest;\nimport com.example.MedQueue.auth.enums.Role;\nimport com.example.MedQueue.auth.jwt.JwtService;\nimport com.example.MedQueue.auth.models.AppUser;\nimport com.example.MedQueue.auth.service.implementation.AppUserServiceImpl;\nimport lombok.RequiredArgsConstructor;\nimport org.springframework.security.authentication.AuthenticationManager;\nimport org.springframework.security.authentication.UsernamePasswordAuthenticationToken;\nimport org.springframework.security.core.Authentication;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@RequestMapping(\"/auth\")\n@RequiredArgsConstructor\npublic class AuthController {\n    private final AuthenticationManager authenticationManager;\n    private final JwtService jwtService;\n    private final AppUserServiceImpl userService;\n\n    @PostMapping(\"/login\")\n    public String login(@RequestBody LoginRequest request) {\n        Authentication authentication = authenticationManager.authenticate(\n                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));\n        return jwtService.generateToken(request.getEmail(), authentication.getAuthorities().iterator().next().getAuthority());\n    }\n\n    @PostMapping(\"/register-admin\")\n    public AppUser registerAdmin(@RequestBody RegisterRequest request) {\n        return userService.registerUser(RegisterRequest , Role);\n    }\n}\n",
+                    "language": "java"
+                },
+                "codebaseEnabled": true
+            },
+            "createdAt": 1753836135954,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "command",
+                                "attrs": {
+                                    "label": "fix"
+                                },
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "/fix"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "codeBlock",
+                                "attrs": {
+                                    "language": "java"
+                                },
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "(RegisterRequest , Role)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "text": "Expression expected"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "bdb3b55b-5234-494e-b59c-17def401ce6d",
+            "role": "system",
+            "content": [
+                {
+                    "type": "errorText",
+                    "text": "Rate limit exceeded. You can try again on July 30 at 10:05.",
+                    "allowRegenerate": true,
+                    "actions": [
+                        {
+                            "type": "upgradePlan",
+                            "waitSeconds": 30217
+                        }
+                    ]
+                }
+            ],
+            "createdAt": 1753836136989,
+            "isInternal": false
+        }
+    ],
+    "isAgent": true,
+    "isCustomAgent": false
+}
+}

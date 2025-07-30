@@ -1,0 +1,1106 @@
+{
+    "checksum": "a58eb938ac0ba82d3bd1919873ce807a1d0975349cffe2f000e459cae1259692",
+    "data": {
+    "id": "cc91069a-6655-40ee-907f-9ad862710566",
+    "createdAt": 1753835463633,
+    "updatedAt": 1753835781480,
+    "title": "JPA Enum Collection Mapping",
+    "messages": [
+        {
+            "id": "301b915c-f261-4a16-8a9b-504ac439462c",
+            "role": "user",
+            "content": [
+                {
+                    "type": "command",
+                    "commandName": "explain"
+                },
+                {
+                    "type": "codeSnippet",
+                    "text": "@Enumerated(EnumType.STRING)\n   private List<Role> roles;",
+                    "language": "java"
+                },
+                {
+                    "type": "text",
+                    "text": "'Basic' attribute type should not be a container"
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                    "fsPath": "C:/Users/DELL/Desktop/javaProject/MedQueue/MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                    "content": "package com.example.MedQueue.auth.models;\n\nimport com.example.MedQueue.auth.enums.Role;\nimport jakarta.persistence.*;\nimport lombok.*;\n\n\nimport java.util.List;\nimport java.util.Set;\nimport java.util.UUID;\n\n\n\n@NoArgsConstructor\n@AllArgsConstructor\n@Entity(name = \"users\")\n@Getter\n@Setter\n@Builder\npublic class AppUser {\n\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    @Column(name = \"id\", updatable = false, nullable = false, columnDefinition = \"UUID\")\n    private UUID id;\n\n    @Column(nullable = false, unique = true)\n    private String fullName;\n\n    @Column(nullable = false, unique = true)\n    private String email;\n\n    @Column(nullable = false)\n    private String password;\n\n    @Column(nullable = false, unique = true)\n    private String phoneNumber;\n    @Enumerated(EnumType.STRING)\n   private List<Role> roles;\n\n\n}\n",
+                    "language": "java"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/enums/Role.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\enums\\Role.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/interfaces/AppUserService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\interfaces\\AppUserService.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/RegisterRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\RegisterRequest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtFilter.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtFilter.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUserRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUserRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "rerankedFiles": [],
+                "usedFilePaths": [
+                    {
+                        "path": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "fsPath": "C:/Users/DELL/Desktop/javaProject/MedQueue/MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "content": "package com.example.MedQueue.auth.models;\n\nimport com.example.MedQueue.auth.enums.Role;\nimport jakarta.persistence.*;\nimport lombok.*;\n\n\nimport java.util.List;\nimport java.util.Set;\nimport java.util.UUID;\n\n\n\n@NoArgsConstructor\n@AllArgsConstructor\n@Entity(name = \"users\")\n@Getter\n@Setter\n@Builder\npublic class AppUser {\n\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    @Column(name = \"id\", updatable = false, nullable = false, columnDefinition = \"UUID\")\n    private UUID id;\n\n    @Column(nullable = false, unique = true)\n    private String fullName;\n\n    @Column(nullable = false, unique = true)\n    private String email;\n\n    @Column(nullable = false)\n    private String password;\n\n    @Column(nullable = false, unique = true)\n    private String phoneNumber;\n    @Enumerated(EnumType.STRING)\n   private List<Role> roles;\n\n\n}\n",
+                        "language": "java"
+                    }
+                ]
+            },
+            "createdAt": 1753835463642,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "command",
+                                "attrs": {
+                                    "label": "explain"
+                                },
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "/explain"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "codeBlock",
+                                "attrs": {
+                                    "language": "java"
+                                },
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "@Enumerated(EnumType.STRING)\n   private List<Role> roles;"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "text": "'Basic' attribute type should not be a container"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "df798c67-377b-4163-a882-2e842b6b3d4e",
+            "role": "assistant",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "The terminal message or code output you provided is related to the use of JPA (Java Persistence API) annotations in your `AppUser` class. Let's break down the message and the relevant code snippet:\n\n### Code Snippet\n```java\n@Enumerated(EnumType.STRING)\nprivate List<Role> roles;\n```\n\n### Terminal Message\n```\n'Basic' attribute type should not be a container\n```\n\n### Explanation\n\n1. **`@Enumerated(EnumType.STRING)` Annotation**:\n   - This annotation is used to specify that the `Role` enum should be persisted as a string in the database. The `EnumType.STRING` option indicates that the name of the enum constant should be stored in the database.\n\n2. **`List<Role> roles;`**:\n   - This line declares a field `roles` which is a list of `Role` enum types. The `Role` enum is presumably defined in your `com.example.MedQueue.auth.enums` package.\n\n3. **Error Message: `'Basic' attribute type should not be a container`**:\n   - This error message indicates that JPA expects a basic attribute type (like a primitive or a simple object) for fields annotated with `@Enumerated`. However, in your code, `roles` is a `List`, which is a container type.\n   - JPA does not directly support collections of enums with the `@Enumerated` annotation. Instead, JPA expects a single enum value, not a collection.\n\n### Context and Resolution\n\n- **System Behavior**: The error suggests that the JPA provider cannot map a collection of enums directly to a database column using the `@Enumerated` annotation. This is because JPA treats `@Enumerated` as applicable to single enum values, not collections.\n\n- **Potential Issues**: If you attempt to run this code, it will likely result in a runtime error or failure to deploy the application due to the incorrect mapping configuration.\n\n- **Necessary Actions**:\n  - To resolve this issue, you should consider using a `@ElementCollection` annotation, which is designed to handle collections of basic types or enums. Here’s how you can modify your code:\n\n    ```java\n    @ElementCollection(targetClass = Role.class)\n    @Enumerated(EnumType.STRING)\n    @CollectionTable(name = \"user_roles\", joinColumns = @JoinColumn(name = \"user_id\"))\n    @Column(name = \"role\")\n    private Set<Role> roles;\n    ```\n\n  - **Explanation of Changes**:\n    - **`@ElementCollection`**: This annotation is used to specify a collection of basic types or embeddable objects. It allows JPA to manage a collection of values.\n    - **`@CollectionTable`**: This annotation specifies the table that will hold the collection. The `joinColumns` attribute defines the foreign key column that links back to the `AppUser` entity.\n    - **`Set<Role>`**: Using a `Set` instead of a `List` is often preferred for collections of enums to avoid duplicates.\n\nBy making these changes, you can correctly map a collection of enum values to a database table, resolving the error message you encountered."
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                    "fsPath": "C:/Users/DELL/Desktop/javaProject/MedQueue/MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                    "content": "package com.example.MedQueue.auth.models;\n\nimport com.example.MedQueue.auth.enums.Role;\nimport jakarta.persistence.*;\nimport lombok.*;\n\n\nimport java.util.List;\nimport java.util.Set;\nimport java.util.UUID;\n\n\n\n@NoArgsConstructor\n@AllArgsConstructor\n@Entity(name = \"users\")\n@Getter\n@Setter\n@Builder\npublic class AppUser {\n\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    @Column(name = \"id\", updatable = false, nullable = false, columnDefinition = \"UUID\")\n    private UUID id;\n\n    @Column(nullable = false, unique = true)\n    private String fullName;\n\n    @Column(nullable = false, unique = true)\n    private String email;\n\n    @Column(nullable = false)\n    private String password;\n\n    @Column(nullable = false, unique = true)\n    private String phoneNumber;\n    @Enumerated(EnumType.STRING)\n   private List<Role> roles;\n\n\n}\n",
+                    "language": "java"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/enums/Role.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\enums\\Role.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/interfaces/AppUserService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\interfaces\\AppUserService.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/RegisterRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\RegisterRequest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtFilter.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtFilter.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUserRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUserRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "rerankedFiles": [],
+                "usedFilePaths": [
+                    {
+                        "path": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "fsPath": "C:/Users/DELL/Desktop/javaProject/MedQueue/MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "content": "package com.example.MedQueue.auth.models;\n\nimport com.example.MedQueue.auth.enums.Role;\nimport jakarta.persistence.*;\nimport lombok.*;\n\n\nimport java.util.List;\nimport java.util.Set;\nimport java.util.UUID;\n\n\n\n@NoArgsConstructor\n@AllArgsConstructor\n@Entity(name = \"users\")\n@Getter\n@Setter\n@Builder\npublic class AppUser {\n\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    @Column(name = \"id\", updatable = false, nullable = false, columnDefinition = \"UUID\")\n    private UUID id;\n\n    @Column(nullable = false, unique = true)\n    private String fullName;\n\n    @Column(nullable = false, unique = true)\n    private String email;\n\n    @Column(nullable = false)\n    private String password;\n\n    @Column(nullable = false, unique = true)\n    private String phoneNumber;\n    @Enumerated(EnumType.STRING)\n   private List<Role> roles;\n\n\n}\n",
+                        "language": "java"
+                    }
+                ]
+            },
+            "createdAt": 1753835481262,
+            "isInternal": false
+        },
+        {
+            "id": "b5231b14-fde5-4d01-b7fa-dede0ea1e2cc",
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "fix"
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/RegisterRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\RegisterRequest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtFilter.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtFilter.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUserRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUserRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "rerankedFiles": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java"
+                    }
+                ],
+                "usedFilePaths": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ],
+                        "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java"
+                    }
+                ]
+            },
+            "createdAt": 1753835705708,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "fix"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "1e1fe47a-b05a-428f-9529-442f8979d7fd",
+            "role": "assistant",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "To address the issue with the `roles` field in your `AppUser` class, you need to modify the way you map the collection of `Role` enums to the database. The error message you encountered suggests that the current mapping is incorrect because JPA does not support collections of enums with the `@Enumerated` annotation directly. Here's how you can fix it:\n\n### Steps to Fix\n\n1. **Modify the `AppUser` Class**:\n   - Use `@ElementCollection` to map the collection of enums.\n   - Define a separate table to store the roles associated with each user.\n\nHere's an example of how you can modify the `AppUser` class:\n\n```java\nimport javax.persistence.*;\nimport java.util.Set;\n\n@Entity\npublic class AppUser {\n    // Other fields...\n\n    @ElementCollection(targetClass = Role.class)\n    @Enumerated(EnumType.STRING)\n    @CollectionTable(name = \"user_roles\", joinColumns = @JoinColumn(name = \"user_id\"))\n    @Column(name = \"role\")\n    private Set<Role> roles;\n\n    // Getters and setters...\n}\n```\n\n### Explanation of Changes\n\n- **`@ElementCollection`**: This annotation is used to specify that the `roles` field is a collection of basic types or embeddable objects. It allows JPA to manage a collection of values.\n  \n- **`@CollectionTable`**: This annotation specifies the table that will hold the collection. The `joinColumns` attribute defines the foreign key column that links back to the `AppUser` entity. In this case, it uses `user_id` as the foreign key.\n\n- **`Set<Role>`**: Using a `Set` instead of a `List` is often preferred for collections of enums to avoid duplicates.\n\n### Contextual Integration\n\n- **Security Configuration**: The `SecurityConfig` class you provided is correctly set up for handling JWT authentication and password encoding. The changes to the `AppUser` class will not affect the security configuration directly but will ensure that user roles are correctly persisted and retrieved from the database.\n\n- **Service Implementation**: In the `AppUserServiceImpl` class, you are already using a `Set<Role>` for the `roles` field, which aligns with the changes made to the `AppUser` class.\n\nBy implementing these changes, you will resolve the error related to the incorrect mapping of the `roles` field and ensure that your application can correctly handle user roles in the database."
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/RegisterRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\RegisterRequest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtFilter.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtFilter.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUserRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUserRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "rerankedFiles": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java"
+                    }
+                ],
+                "usedFilePaths": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ],
+                        "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java"
+                    }
+                ]
+            },
+            "createdAt": 1753835722542,
+            "isInternal": false
+        },
+        {
+            "id": "15e6aee9-69bc-44c9-ba02-25fc3e535efa",
+            "role": "user",
+            "content": [
+                {
+                    "type": "codeSnippet",
+                    "text": "\n        .csrf().disable()\n        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\n        .and()\n        .authorizeHttpRequests()\n        .requestMatchers(\"/api/auth/**\").permitAll()\n        .anyRequest().authenticated()\n        .and()\n        .addFilterBe"
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/RegisterRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\RegisterRequest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtFilter.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtFilter.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUserRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUserRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "rerankedFiles": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java"
+                    }
+                ],
+                "usedFilePaths": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ],
+                        "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                    }
+                ]
+            },
+            "createdAt": 1753835735745,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "codeBlock",
+                        "attrs": {
+                            "language": null
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "\n        .csrf().disable()\n        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\n        .and()\n        .authorizeHttpRequests()\n        .requestMatchers(\"/api/auth/**\").permitAll()\n        .anyRequest().authenticated()\n        .and()\n        .addFilterBe"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "b6ea3613-721c-480c-8ace-f4a2af9f0f9f",
+            "role": "assistant",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "The code snippet you provided is part of a Spring Security configuration class, `SecurityConfig`, which is responsible for setting up security filters and rules for your application. Let's break down the relevant parts of the configuration and address any potential issues:\n\n### Code Snippet Breakdown\n\n```java\nhttp\n    .csrf().disable()\n    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\n    .and()\n    .authorizeHttpRequests()\n    .requestMatchers(\"/api/auth/**\").permitAll()\n    .anyRequest().authenticated()\n    .and()\n    .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```\n\n1. **`csrf().disable()`**:\n   - Disables Cross-Site Request Forgery (CSRF) protection. This is common in stateless applications, such as those using JWT for authentication, where CSRF protection is not necessary.\n\n2. **`sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)`**:\n   - Configures the session management to be stateless. This means that the server will not store any session information, which is typical for RESTful APIs using JWTs.\n\n3. **`authorizeHttpRequests()`**:\n   - Begins the configuration of URL-based authorization.\n\n4. **`requestMatchers(\"/api/auth/**\").permitAll()`**:\n   - Allows all requests to URLs that match the pattern `/api/auth/**` without requiring authentication. This is typically used for endpoints like login and registration.\n\n5. **`anyRequest().authenticated()`**:\n   - Requires authentication for any other requests that do not match the specified patterns.\n\n6. **`addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)`**:\n   - Adds a custom filter, `jwtAuthFilter`, before the `UsernamePasswordAuthenticationFilter`. This is where JWT tokens are typically validated.\n\n### Potential Issues and Fixes\n\n- **Incomplete Code Snippet**: The snippet you provided ends with `addFilterBe`, which seems to be a typo or incomplete line. The correct method call should be `addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);`, which is already correctly implemented in your `SecurityConfig` class.\n\n- **Ensure `JwtFilter` is Correctly Implemented**: Make sure that your `JwtFilter` class is correctly implemented to intercept requests and validate JWT tokens. This filter should extract the token from the request, validate it, and set the authentication context if the token is valid.\n\n- **Security Considerations**: Disabling CSRF is appropriate for stateless applications, but ensure that your JWT tokens are securely generated and validated to prevent unauthorized access.\n\nBy ensuring that the `SecurityConfig` class is correctly set up as shown, your application should be able to handle authentication and authorization using JWTs effectively. If there are any specific issues or errors you are encountering, please provide more details for further assistance."
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "keyword_search"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/RegisterRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\RegisterRequest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtFilter.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtFilter.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUserRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUserRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "rerankedFiles": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java"
+                    }
+                ],
+                "usedFilePaths": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ],
+                        "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                    }
+                ]
+            },
+            "createdAt": 1753835749162,
+            "isInternal": false
+        },
+        {
+            "id": "9e289edb-fe4b-4203-9eeb-b35d02bf5dae",
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "fix"
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/RegisterRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\RegisterRequest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtFilter.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtFilter.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUserRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUserRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "rerankedFiles": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java"
+                    }
+                ],
+                "usedFilePaths": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ],
+                        "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java"
+                    }
+                ]
+            },
+            "createdAt": 1753835769146,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "fix"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "83676b5b-7ebb-4642-8770-4a18920b0ce6",
+            "role": "assistant",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "The `SecurityConfig` class you provided is mostly correct, but there was an incomplete line in your previous message. Let's ensure the configuration is complete and correct, and address any potential issues:\n\n### Complete and Corrected `SecurityConfig` Class\n\n```java\npackage com.example.MedQueue.auth.config;\n\nimport com.example.MedQueue.auth.jwt.JwtFilter;\nimport lombok.RequiredArgsConstructor;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.security.authentication.AuthenticationManager;\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\nimport org.springframework.security.config.http.SessionCreationPolicy;\nimport org.springframework.security.core.userdetails.UserDetailsService;\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\nimport org.springframework.security.crypto.password.PasswordEncoder;\nimport org.springframework.security.web.SecurityFilterChain;\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\n\n@Configuration\n@EnableWebSecurity\n@RequiredArgsConstructor\npublic class SecurityConfig {\n    private final JwtFilter jwtAuthFilter;\n    private final UserDetailsService userDetailsService;\n\n    @Bean\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\n        http\n                .csrf().disable()\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\n                .and()\n                .authorizeHttpRequests()\n                .requestMatchers(\"/api/auth/**\").permitAll()\n                .anyRequest().authenticated()\n                .and()\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n\n        return http.build();\n    }\n\n    @Bean\n    public PasswordEncoder passwordEncoder() {\n        return new BCryptPasswordEncoder();\n    }\n\n    @Bean\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\n        return config.getAuthenticationManager();\n    }\n}\n```\n\n### Key Points\n\n1. **`addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)`**:\n   - This line is correctly placed to add your custom `JwtFilter` before the `UsernamePasswordAuthenticationFilter`. This ensures that JWT tokens are validated before the standard authentication process.\n\n2. **Security Configuration**:\n   - The configuration disables CSRF protection, which is appropriate for stateless applications using JWTs.\n   - It sets the session management policy to `STATELESS`, meaning no session is maintained on the server.\n   - It allows unauthenticated access to endpoints under `/api/auth/**`, which is typical for authentication-related endpoints like login and registration.\n   - All other requests require authentication.\n\n3. **Password Encoding**:\n   - The `passwordEncoder` bean uses `BCryptPasswordEncoder`, which is a secure way to hash passwords.\n\n4. **Authentication Manager**:\n   - The `authenticationManager` bean is configured to use the default authentication manager provided by Spring Security.\n\n### Additional Considerations\n\n- **Ensure `JwtFilter` is Implemented Correctly**: Make sure your `JwtFilter` class is correctly implemented to extract and validate JWT tokens from incoming requests.\n\n- **Role Handling in `CustomUserDetailsService`**:\n  - In the `CustomUserDetailsService`, ensure that roles are correctly converted to a format expected by Spring Security. The current implementation seems to have an issue with how roles are added. You might want to adjust it to properly handle the conversion of roles to a format like `ROLE_USER`.\n\nBy ensuring these configurations and implementations are correct, your security setup should work effectively for handling authentication and authorization using JWTs. If you encounter specific issues, please provide more details for further assistance."
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/AuthController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\AuthController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/implementation/AppUserServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/dtos/request/RegisterRequest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\dtos\\request\\RegisterRequest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/controller/UserController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\controller\\UserController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/jwt/JwtFilter.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\jwt\\JwtFilter.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/config/SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/service/CustomUserDetailsService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/repo/AppUserRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\repo\\AppUserRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/auth/models/AppUser.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\models\\AppUser.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "rerankedFiles": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java"
+                    }
+                ],
+                "usedFilePaths": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\config\\SecurityConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ],
+                        "content": "package com.example.MedQueue.auth.config;\r\n\r\nimport com.example.MedQueue.auth.jwt.JwtFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\n\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\npublic class SecurityConfig {\r\n    private final JwtAuthenticationFilter jwtAuthFilter;\r\n    private final UserDetailsService userDetailsService;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf().disable()\r\n                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                .and()\r\n                .authorizeHttpRequests()\r\n                .requestMatchers(\"/api/auth/**\").permitAll()\r\n                .anyRequest().authenticated()\r\n                .and()\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n}\r\n"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\CustomUserDetailsService.java"
+                    },
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java",
+                        "fsPath": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\auth\\service\\implementation\\AppUserServiceImpl.java"
+                    }
+                ]
+            },
+            "createdAt": 1753835781480,
+            "isInternal": false
+        }
+    ],
+    "isAgent": false,
+    "isNameGenerated": true,
+    "isCustomAgent": false
+}
+}
