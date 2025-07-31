@@ -21,6 +21,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepo;
     private final AvailabilitySlotRepository availabilityRepo;
 
+    @Override
     public String bookAppointment(String patientId, String doctorId, LocalDate date, LocalTime time) {
         validateDoctorAvailability(doctorId, date, time);
         validatePatientAppointment(patientId, date);
@@ -32,7 +33,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
     private void validateDoctorAvailability(String doctorId, LocalDate date, LocalTime time) {
         if (appointmentRepo.existsByDoctorIdAndDateAndTime(doctorId, date, time)) {
-            throw new RuntimeException("Time slot already booked for doctor.");
+            throw new RuntimeException("Doctor already been booked.");
         }
     }
 
@@ -51,10 +52,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
     }
 
+    @Override
     public List<Appointment> viewPatientAppointments(String patientId) {
         return appointmentRepo.findByPatientId(patientId);
     }
-
+    @Override
     public String cancelAppointment(String appointmentId, String patientId) {
         Appointment appt = appointmentRepo.findById( UUID.fromString( appointmentId ) )
                 .orElseThrow(() -> new RuntimeException("Appointment not found"));
@@ -65,7 +67,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentRepo.save(appt);
         return "Appointment cancelled.";
     }
-
+    @Override
     public String rescheduleAppointment(String appointmentId, String patientId, LocalDate newDate, LocalTime newTime) {
         Appointment appt = appointmentRepo.findById( UUID.fromString( appointmentId ) )
                 .orElseThrow(() -> new RuntimeException("Appointment not found"));
@@ -82,18 +84,22 @@ public class AppointmentServiceImpl implements AppointmentService {
         return "Appointment rescheduled.";
     }
 
+        @Override
     public List<Appointment> viewDoctorAppointments(String doctorId, LocalDate date) {
         return appointmentRepo.findByDoctorIdAndDate(doctorId, date);
     }
+    @Override
     public List<Appointment> getAppointmentsForPatient(String patientId) {
         return appointmentRepo.findByPatientId(patientId);
     }
 
+    @Override
     public List<Appointment> getAppointmentsForDoctor(String doctorId) {
         return appointmentRepo.findByDoctorId(doctorId);
 
 
     }
+    @Override
 
     public void cancelAppointment(String appointmentId) {
         appointmentRepo.deleteById( UUID.fromString( appointmentId ) );
