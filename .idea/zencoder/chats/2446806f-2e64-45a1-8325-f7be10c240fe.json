@@ -1,0 +1,187 @@
+{
+    "checksum": "f0e08cfa984b46df9d2d527e3f89f9bdee1d5732a50237a47c43c97d27602f95",
+    "data": {
+    "id": "2446806f-2e64-45a1-8325-f7be10c240fe",
+    "createdAt": 1754438377364,
+    "updatedAt": 1754438397596,
+    "title": "\\service\\implementation\\AppointmentServiceImpl....",
+    "messages": [
+        {
+            "id": "f8febef2-2175-47f5-b723-d4f1596bd740",
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "\\service\\implementation\\AppointmentServiceImpl.java:30:46"
+                },
+                {
+                    "type": "text",
+                    "text": "java: cannot find symbol"
+                },
+                {
+                    "type": "text",
+                    "text": "  symbol:   method builder()"
+                },
+                {
+                    "type": "text",
+                    "text": "  location: class com.example.MedQueue.appointment.model.Appointment"
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\service\\implementation\\AppointmentServiceImpl.java",
+                    "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\service\\implementation\\AppointmentServiceImpl.java",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "package com.example.MedQueue.appointment.service.implementation;\r\n\r\nimport com.example.MedQueue.appointment.enums.AppointmentStatus;\r\nimport com.example.MedQueue.appointment.model.Appointment;\r\nimport com.example.MedQueue.appointment.model.AvailabilitySlot;\r\nimport com.example.MedQueue.appointment.repo.AppointmentRepository;\r\nimport com.example.MedQueue.appointment.repo.AvailabilitySlotRepository;\r\nimport com.example.MedQueue.appointment.service.interfaces.AppointmentService;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.LocalTime;\r\nimport java.util.List;\r\nimport java.util.UUID;\r\n\r\n@Service\r\n@RequiredArgsConstructor\r\n\r\npublic class AppointmentServiceImpl implements AppointmentService {\r\n    private final AppointmentRepository appointmentRepo;\r\n    private final AvailabilitySlotRepository availabilityRepo;\r\n\r\n    @Override\r\n    public String bookAppointment(String patientId, String doctorId, LocalDate date, LocalTime time) {\r\n        validateDoctorAvailability(doctorId, date, time);\r\n        validatePatientAppointment(patientId, date);\r\n        validateDoctorSchedule(doctorId, date, time);\r\n\r\n        Appointment appointment = Appointment.builder()\r\n                .patientId(patientId)\r\n                .doctorId(doctorId)\r\n                .date(date)\r\n                .time(time)\r\n                .status(AppointmentStatus.BOOKED)\r\n                .build();\r\n        appointmentRepo.save(appointment);\r\n        return \"Appointment booked successfully.\";\r\n    }\r\n    private void validateDoctorAvailability(String doctorId, LocalDate date, LocalTime time) {\r\n        if (appointmentRepo.existsByDoctorIdAndDateAndTime(doctorId, date, time)) {\r\n            throw new RuntimeException(\"Doctor already been booked.\");\r\n        }\r\n    }\r\n\r\n    private void validatePatientAppointment(String patientId, LocalDate date) {\r\n        if (appointmentRepo.existsByPatientIdAndDate(patientId, date)) {\r\n            throw new RuntimeException(\"Patient already has an appointment on this date.\");\r\n        }\r\n    }\r\n\r\n    private void validateDoctorSchedule(String doctorId, LocalDate date, LocalTime time) {\r\n        AvailabilitySlot slot = availabilityRepo.findByDoctorIdAndDate(doctorId, date)\r\n                .orElseThrow(() -> new RuntimeException(\"Doctor has not set availability for that date.\"));\r\n\r\n        if (!slot.getAvailableTimes().contains(time)) {\r\n            throw new RuntimeException(\"Time not available.\");\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public List<Appointment> viewPatientAppointments(String patientId) {\r\n        return appointmentRepo.findByPatientId(patientId);\r\n    }\r\n    @Override\r\n    public String cancelAppointment(String appointmentId, String patientId) {\r\n        Appointment appt = appointmentRepo.findById( UUID.fromString( appointmentId ) )\r\n                .orElseThrow(() -> new RuntimeException(\"Appointment not found\"));\r\n        if (!appt.getPatientId().equals(patientId)) {\r\n            throw new RuntimeException(\"Unauthorized cancel attempt.\");\r\n        }\r\n        appt.setStatus(AppointmentStatus.CANCELLED);\r\n        appointmentRepo.save(appt);\r\n        return \"Appointment cancelled.\";\r\n    }\r\n    @Override\r\n    public String rescheduleAppointment(String appointmentId, String patientId, LocalDate newDate, LocalTime newTime) {\r\n        Appointment appt = appointmentRepo.findById( UUID.fromString( appointmentId ) )\r\n                .orElseThrow(() -> new RuntimeException(\"Appointment not found\"));\r\n        if (!appt.getPatientId().equals(patientId)) {\r\n            throw new RuntimeException(\"Unauthorized reschedule attempt.\");\r\n        }\r\n        if (appointmentRepo.existsByDoctorIdAndDateAndTime(appt.getDoctorId(), newDate, newTime)) {\r\n            throw new RuntimeException(\"Time slot already booked.\");\r\n        }\r\n\r\n        appt.setDate(newDate);\r\n        appt.setTime(newTime);\r\n        appointmentRepo.save(appt);\r\n        return \"Appointment rescheduled.\";\r\n    }\r\n\r\n        @Override\r\n    public List<Appointment> viewDoctorAppointments(String doctorId, LocalDate date) {\r\n        return appointmentRepo.findByDoctorIdAndDate(doctorId, date);\r\n    }\r\n    @Override\r\n    public List<Appointment> getAppointmentsForPatient(String patientId) {\r\n        return appointmentRepo.findByPatientId(patientId);\r\n    }\r\n\r\n    @Override\r\n    public List<Appointment> getAppointmentsForDoctor(String doctorId) {\r\n        return appointmentRepo.findByDoctorId(doctorId);\r\n\r\n\r\n    }\r\n    @Override\r\n\r\n    public void cancelAppointment(String appointmentId) {\r\n        appointmentRepo.deleteById( UUID.fromString( appointmentId ) );\r\n    }\r\n}\r\n"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/pom.xml",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\pom.xml",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/resources/application.properties",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\resources\\application.properties",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/notification/service/EmailService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\notification\\service\\EmailService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/notification/service/PushNotificationService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\notification\\service\\PushNotificationService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/notification/service/QueueNotifierService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\notification\\service\\QueueNotifierService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/appointment/model/Appointment.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\model\\Appointment.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/notification/config/FirebaseConfig.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\notification\\config\\FirebaseConfig.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/queue/controller/QueueController.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\queue\\controller\\QueueController.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/MedQueueApplication.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\MedQueueApplication.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/appointment/service/implementation/AppointmentServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\service\\implementation\\AppointmentServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "usedFilePaths": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\service\\implementation\\AppointmentServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\service\\implementation\\AppointmentServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ],
+                        "content": "package com.example.MedQueue.appointment.service.implementation;\r\n\r\nimport com.example.MedQueue.appointment.enums.AppointmentStatus;\r\nimport com.example.MedQueue.appointment.model.Appointment;\r\nimport com.example.MedQueue.appointment.model.AvailabilitySlot;\r\nimport com.example.MedQueue.appointment.repo.AppointmentRepository;\r\nimport com.example.MedQueue.appointment.repo.AvailabilitySlotRepository;\r\nimport com.example.MedQueue.appointment.service.interfaces.AppointmentService;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.LocalTime;\r\nimport java.util.List;\r\nimport java.util.UUID;\r\n\r\n@Service\r\n@RequiredArgsConstructor\r\n\r\npublic class AppointmentServiceImpl implements AppointmentService {\r\n    private final AppointmentRepository appointmentRepo;\r\n    private final AvailabilitySlotRepository availabilityRepo;\r\n\r\n    @Override\r\n    public String bookAppointment(String patientId, String doctorId, LocalDate date, LocalTime time) {\r\n        validateDoctorAvailability(doctorId, date, time);\r\n        validatePatientAppointment(patientId, date);\r\n        validateDoctorSchedule(doctorId, date, time);\r\n\r\n        Appointment appointment = Appointment.builder()\r\n                .patientId(patientId)\r\n                .doctorId(doctorId)\r\n                .date(date)\r\n                .time(time)\r\n                .status(AppointmentStatus.BOOKED)\r\n                .build();\r\n        appointmentRepo.save(appointment);\r\n        return \"Appointment booked successfully.\";\r\n    }\r\n    private void validateDoctorAvailability(String doctorId, LocalDate date, LocalTime time) {\r\n        if (appointmentRepo.existsByDoctorIdAndDateAndTime(doctorId, date, time)) {\r\n            throw new RuntimeException(\"Doctor already been booked.\");\r\n        }\r\n    }\r\n\r\n    private void validatePatientAppointment(String patientId, LocalDate date) {\r\n        if (appointmentRepo.existsByPatientIdAndDate(patientId, date)) {\r\n            throw new RuntimeException(\"Patient already has an appointment on this date.\");\r\n        }\r\n    }\r\n\r\n    private void validateDoctorSchedule(String doctorId, LocalDate date, LocalTime time) {\r\n        AvailabilitySlot slot = availabilityRepo.findByDoctorIdAndDate(doctorId, date)\r\n                .orElseThrow(() -> new RuntimeException(\"Doctor has not set availability for that date.\"));\r\n\r\n        if (!slot.getAvailableTimes().contains(time)) {\r\n            throw new RuntimeException(\"Time not available.\");\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public List<Appointment> viewPatientAppointments(String patientId) {\r\n        return appointmentRepo.findByPatientId(patientId);\r\n    }\r\n    @Override\r\n    public String cancelAppointment(String appointmentId, String patientId) {\r\n        Appointment appt = appointmentRepo.findById( UUID.fromString( appointmentId ) )\r\n                .orElseThrow(() -> new RuntimeException(\"Appointment not found\"));\r\n        if (!appt.getPatientId().equals(patientId)) {\r\n            throw new RuntimeException(\"Unauthorized cancel attempt.\");\r\n        }\r\n        appt.setStatus(AppointmentStatus.CANCELLED);\r\n        appointmentRepo.save(appt);\r\n        return \"Appointment cancelled.\";\r\n    }\r\n    @Override\r\n    public String rescheduleAppointment(String appointmentId, String patientId, LocalDate newDate, LocalTime newTime) {\r\n        Appointment appt = appointmentRepo.findById( UUID.fromString( appointmentId ) )\r\n                .orElseThrow(() -> new RuntimeException(\"Appointment not found\"));\r\n        if (!appt.getPatientId().equals(patientId)) {\r\n            throw new RuntimeException(\"Unauthorized reschedule attempt.\");\r\n        }\r\n        if (appointmentRepo.existsByDoctorIdAndDateAndTime(appt.getDoctorId(), newDate, newTime)) {\r\n            throw new RuntimeException(\"Time slot already booked.\");\r\n        }\r\n\r\n        appt.setDate(newDate);\r\n        appt.setTime(newTime);\r\n        appointmentRepo.save(appt);\r\n        return \"Appointment rescheduled.\";\r\n    }\r\n\r\n        @Override\r\n    public List<Appointment> viewDoctorAppointments(String doctorId, LocalDate date) {\r\n        return appointmentRepo.findByDoctorIdAndDate(doctorId, date);\r\n    }\r\n    @Override\r\n    public List<Appointment> getAppointmentsForPatient(String patientId) {\r\n        return appointmentRepo.findByPatientId(patientId);\r\n    }\r\n\r\n    @Override\r\n    public List<Appointment> getAppointmentsForDoctor(String doctorId) {\r\n        return appointmentRepo.findByDoctorId(doctorId);\r\n\r\n\r\n    }\r\n    @Override\r\n\r\n    public void cancelAppointment(String appointmentId) {\r\n        appointmentRepo.deleteById( UUID.fromString( appointmentId ) );\r\n    }\r\n}\r\n"
+                    }
+                ]
+            },
+            "createdAt": 1754438377377,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "\\service\\implementation\\AppointmentServiceImpl.java:30:46"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "java: cannot find symbol"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "  symbol:   method builder()"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "  location: class com.example.MedQueue.appointment.model.Appointment"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "6e28046e-ac25-4326-a9f9-2f1804dd7352",
+            "role": "system",
+            "content": [
+                {
+                    "type": "errorText",
+                    "text": "The chat request was not successful. Please try again later.",
+                    "allowRegenerate": true
+                }
+            ],
+            "createdAt": 1754438397596,
+            "isInternal": false
+        }
+    ],
+    "isAgent": false,
+    "isCustomAgent": false,
+    "isUnitTestsAgent": false,
+    "isE2EAgent": false,
+    "autoApply": false
+}
+}

@@ -1,0 +1,139 @@
+{
+    "checksum": "05e5e48613922f387108d475cec8d08fa50e7ab13debe116ea4602577192055f",
+    "data": {
+    "id": "0852bc80-10e0-470a-9612-fd9152b8af3f",
+    "createdAt": 1753928601171,
+    "updatedAt": 1753928618253,
+    "title": "Firebase Notification Fixes",
+    "messages": [
+        {
+            "id": "2dc4af2e-ccb6-4e60-8f1f-17def5e82f6c",
+            "role": "user",
+            "content": [
+                {
+                    "type": "command",
+                    "commandName": "fix"
+                },
+                {
+                    "type": "codeSnippet",
+                    "text": "new Notification(title, body)",
+                    "language": "java"
+                },
+                {
+                    "type": "text",
+                    "text": "'Notification(com.google.firebase.messaging.Notification.Builder)' has private access in 'com.google.firebase.messaging.Notification'"
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\notification\\service\\PushNotificationService.java",
+                    "fsPath": "C:/Users/DELL/Desktop/javaProject/MedQueue/MedQueue/src/main/java/com/example/MedQueue/notification/service/PushNotificationService.java",
+                    "content": "package com.example.MedQueue.notification.service;\n\nimport com.google.firebase.messaging.FirebaseMessaging;\nimport com.google.firebase.messaging.FirebaseMessagingException;\nimport com.google.firebase.messaging.Message;\nimport com.google.firebase.messaging.Notification;\nimport org.springframework.stereotype.Service;\n\n@Service\npublic class PushNotificationService {\n    public void sendPushNotification(String fcmToken, String title, String body) throws FirebaseMessagingException {\n        Message message = Message.builder()\n                .setToken(fcmToken)\n                .setNotification(new Notification(title, body))\n                .build();\n\n        String response = FirebaseMessaging.getInstance().send(message);\n        System.out.println(\"Sent push message: \" + response);\n    }\n\n}\n",
+                    "language": "java"
+                },
+                "codebaseEnabled": true
+            },
+            "createdAt": 1753928601175,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "command",
+                                "attrs": {
+                                    "label": "fix"
+                                },
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "/fix"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "codeBlock",
+                                "attrs": {
+                                    "language": "java"
+                                },
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "new Notification(title, body)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "text": "'Notification(com.google.firebase.messaging.Notification.Builder)' has private access in 'com.google.firebase.messaging.Notification'"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "c3803f44-ebd0-428c-9dc3-fcabd90aa120",
+            "role": "assistant",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "I can see the issue. In newer versions of Firebase, the `Notification` constructor is private and you need to use the builder pattern instead. Let me fix this for you:"
+                },
+                {
+                    "type": "toolCall",
+                    "toolCallId": "toolu_015otWcAj3Fwox2jTrGPDB9i",
+                    "statusText": "Change generated",
+                    "status": "SUCCESS",
+                    "context": {
+                        "files": [
+                            {
+                                "path": "MedQueue/src/main/java/com/example/MedQueue/notification/service/PushNotificationService.java",
+                                "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\notification\\service\\PushNotificationService.java"
+                            }
+                        ]
+                    },
+                    "isHidden": false
+                },
+                {
+                    "type": "codeHunk",
+                    "lineBasedDiff": "--- C:/Users/DELL/Desktop/javaProject/MedQueue/MedQueue/src/main/java/com/example/MedQueue/notification/service/PushNotificationService.java\n+++ C:/Users/DELL/Desktop/javaProject/MedQueue/MedQueue/src/main/java/com/example/MedQueue/notification/service/PushNotificationService.java\n@@ -11,7 +11,10 @@\n     public void sendPushNotification(String fcmToken, String title, String body) throws FirebaseMessagingException {\n         Message message = Message.builder()\n                 .setToken(fcmToken)\n-                .setNotification(new Notification(title, body))\n+                .setNotification(Notification.builder()\n+                        .setTitle(title)\n+                        .setBody(body)\n+                        .build())\n                 .build();\n \n         String response = FirebaseMessaging.getInstance().send(message);",
+                    "refToolCallId": "toolu_015otWcAj3Fwox2jTrGPDB9i"
+                },
+                {
+                    "type": "text",
+                    "text": "The issue has been fixed! I replaced the direct `Notification` constructor with the builder pattern:\n\n```java\nNotification.builder()\n    .setTitle(title)\n    .setBody(body)\n    .build()\n```\n\nThis is the correct approach for newer versions of Firebase Cloud Messaging, where the `Notification` constructor is private and you must use the builder pattern instead. The code should now compile without errors."
+                },
+                {
+                    "type": "codePatch",
+                    "diffs": [
+                        {
+                            "path": "MedQueue/src/main/java/com/example/MedQueue/notification/service/PushNotificationService.java",
+                            "patch": "@@ -606,12 +606,8 @@\n ion(\n-new \n Noti\n@@ -618,20 +618,133 @@\n tion\n-(title, body\n+.builder()%0D%0A                        .setTitle(title)%0D%0A                        .setBody(body)%0D%0A                        .build(\n ))%0D%0A\n",
+                            "isNew": false,
+                            "isApplied": true
+                        }
+                    ]
+                }
+            ],
+            "context": {
+                "author": "Coding Agent",
+                "operationId": "2e039cfd-81f0-4f5c-9c1f-90e8d83d5bd9",
+                "usageStatistics": {
+                    "llmCallsUsedForAnswer": 2.0,
+                    "llmCallsUsedTotal": 5.0,
+                    "llmCallsLimit": 25.0,
+                    "limitRenewalMillisecondTimestamp": 1753952928664
+                }
+            },
+            "createdAt": 1753928606147,
+            "isInternal": false
+        }
+    ],
+    "isAgent": true,
+    "isNameGenerated": true,
+    "isCustomAgent": false
+}
+}

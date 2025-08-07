@@ -27,7 +27,13 @@ public class AppointmentServiceImpl implements AppointmentService {
         validatePatientAppointment(patientId, date);
         validateDoctorSchedule(doctorId, date, time);
 
-        Appointment appointment = new Appointment(null, patientId, doctorId, date, time, AppointmentStatus.BOOKED);
+        Appointment appointment = Appointment.builder()
+                .patientId(patientId)
+                .doctorId(doctorId)
+                .date(date)
+                .time(time)
+                .status(AppointmentStatus.BOOKED)
+                .build();
         appointmentRepo.save(appointment);
         return "Appointment booked successfully.";
     }
