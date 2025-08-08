@@ -3,9 +3,7 @@ package com.example.MedQueue.patient.data.model;
 import com.example.MedQueue.auth.enums.Role;
 import com.example.MedQueue.auth.models.AppUser;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 import java.util.UUID;
@@ -14,6 +12,8 @@ import java.util.UUID;
 @Setter
 @Entity(name="patient")
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Patient  implements AppUser {
 
     @Id
@@ -38,10 +38,6 @@ public class Patient  implements AppUser {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     private Set<Role> roles;
-
-    public Patient() {
-
-    }
 
     // Getters and Setters
 

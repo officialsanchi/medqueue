@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.UUID;
 
 public interface AdminPanelService {
-    List<AppUser> getAllUsers();
-    AppUser updateUsers(UUID id, AppUser updatedUser);
-    void deleteUser(UUID id);
-    List<Appointment> getAllAppointments();
-    SystemSetting getSettings();
-    SystemSetting updateSettings(SystemSetting newSettings);
+//    List<AppUser> getAllUsers();
+//    AppUser updateUsers(UUID id, AppUser updatedUser);
+//    void deleteUser(UUID id);
+//    List<Appointment> getAllAppointments();
+//    SystemSetting getSettings();
+//    SystemSetting updateSettings(SystemSetting newSettings);
 }

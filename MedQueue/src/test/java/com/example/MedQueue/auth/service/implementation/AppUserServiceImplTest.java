@@ -2,7 +2,6 @@ package com.example.MedQueue.auth.service.implementation;
 
 import com.example.MedQueue.auth.enums.Role;
 import com.example.MedQueue.auth.models.AppUser;
-import com.example.MedQueue.auth.repo.AppUsersRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

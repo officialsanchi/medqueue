@@ -1,6 +1,6 @@
 package com.example.MedQueue.queue.controller;
 
-import com.example.MedQueue.notification.service.QueueNotifierService;
+import com.example.MedQueue.notification.config.QueueNotifierService;
 import com.example.MedQueue.queue.service.implementations.QueueServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,10 +39,10 @@ public class QueueController {
         return ResponseEntity.ok("Cancelled from queue");
     }
 
-
-    @PostMapping("/notify-next")
-    public ResponseEntity<String> notifyNext(@RequestParam String doctorId) {
-        queueNotifierService.notifyNextPatient(doctorId, LocalDate.now());
-        return ResponseEntity.ok("Notifications sent to upcoming patients.");
-    }
+//
+//    @PostMapping("/notify-next")
+//    public ResponseEntity<String> notifyNext(@RequestParam String doctorId) {
+//        queueNotifierService.notifyNextPatient(doctorId, LocalDate.now());
+//        return ResponseEntity.ok("Notifications sent to upcoming patients.");
+//    }
 }

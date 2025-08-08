@@ -13,21 +13,21 @@ import java.util.UUID;
 @RequestMapping("/doctor")
 @RequiredArgsConstructor
 public class DoctorPanelController {
-    private final DoctorService doctorPanelService;
+//    private final DoctorService doctorPanelService;
 
-    @GetMapping("/{doctorId}/appointments/today")
-    public List<Appointment> getTodaysAppointments(@PathVariable UUID doctorId) {
-        return doctorPanelService.getTodaysAppointments(doctorId);
-    }
-
-    @GetMapping("/patients/{patientId}/history")
-    public List<Appointment> getPatientHistory(@PathVariable UUID patientId) {
-        return doctorPanelService.getPatientHistory(patientId);
-    }
-
-    @PutMapping("/appointments/{appointmentId}/status")
-    public Appointment updateStatus(@PathVariable UUID appointmentId,
-                                    @RequestParam AppointmentStatus status) {
-        return doctorPanelService.markAppointmentStatus(appointmentId, status);
-    }
+//    @GetMapping("/{doctorId}/appointments/today")
+//    public List<Appointment> getTodaysAppointments(@PathVariable UUID doctorId) {
+//        return doctorPanelService.getTodaysAppointments(doctorId);
+//    }
+//
+//    @GetMapping("/patients/{patientId}/history")
+//    public List<Appointment> getPatientHistory(@PathVariable UUID patientId) {
+//        return doctorPanelService.getPatientHistory(patientId);
+//    }
+//
+//    @PutMapping("/appointments/{appointmentId}/status")
+//    public Appointment updateStatus(@PathVariable UUID appointmentId,
+//                                    @RequestParam AppointmentStatus status) {
+//        return doctorPanelService.markAppointmentStatus(appointmentId, status);
+//    }
 }

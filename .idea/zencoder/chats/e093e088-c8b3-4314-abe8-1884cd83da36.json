@@ -1,0 +1,200 @@
+{
+    "checksum": "ea914bff9a990b97eb97eb8a26c5395e77ef684ecda257c0b2da6b10403d1db3",
+    "data": {
+    "id": "e093e088-c8b3-4314-abe8-1884cd83da36",
+    "createdAt": 1754669225005,
+    "updatedAt": 1754669281010,
+    "title": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQ...",
+    "messages": [
+        {
+            "id": "e4dbcfc3-0254-4a15-ab52-91d21e9331b8",
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\service\\implementation\\AppointmentServiceImpl.java:28:47"
+                },
+                {
+                    "type": "text",
+                    "text": "java: cannot find symbol"
+                },
+                {
+                    "type": "text",
+                    "text": "  symbol:   method builder()"
+                },
+                {
+                    "type": "text",
+                    "text": "  location: class com.example.MedQueue.appointment.model.Appointment"
+                },
+                {
+                    "type": "text",
+                    "text": "fix"
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\model\\Appointment.java",
+                    "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\model\\Appointment.java",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "package com.example.MedQueue.appointment.model;\r\n\r\nimport com.example.MedQueue.appointment.enums.AppointmentStatus;\r\nimport com.example.MedQueue.auth.enums.Role;\r\nimport com.google.auto.value.AutoValue;\r\nimport jakarta.persistence.*;\r\nimport lombok.*;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.LocalTime;\r\nimport java.util.UUID;\r\n\r\n@Data\r\n@NoArgsConstructor\r\n@AllArgsConstructor\r\n@Builder\r\n@Entity(name=\"appointment\")\r\n\r\n\r\npublic class Appointment {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.UUID)\r\n    private UUID id;\r\n\r\n    private String patientId;\r\n    private String doctorId;\r\n    private String description;\r\n    private LocalDate date;\r\n    private LocalTime time;\r\n    @Enumerated(EnumType.STRING)\r\n    @CollectionTable(name = \"appointment_status\", joinColumns = @JoinColumn(name = \"appointment_id\"))\r\n    @Column(name = \"appointmentStatus\")\r\n    private AppointmentStatus status;\r\n\r\n    public void cancel(String requestingPatientId) {\r\n        if (!this.patientId.equals(requestingPatientId)) {\r\n            throw new RuntimeException(\"Unauthorized cancel attempt.\");\r\n        }\r\n        if (this.status == AppointmentStatus.CANCELLED) {\r\n            throw new RuntimeException(\"Appointment already cancelled.\");\r\n        }\r\n        this.status = AppointmentStatus.CANCELLED;\r\n    }\r\n}\r\n"
+                },
+                "codebaseEnabled": true,
+                "ragFiles": [
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/patient/service/interfaces/PatientService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\patient\\service\\interfaces\\PatientService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/patient/service/implementation/PatientServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\patient\\service\\implementation\\PatientServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/doctor/service/implemetations/DoctorServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\doctor\\service\\implemetations\\DoctorServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/appointment/service/implementation/AppointmentServiceImpl.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\service\\implementation\\AppointmentServiceImpl.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/doctor/service/interfaces/DoctorService.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\doctor\\service\\interfaces\\DoctorService.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/appointment/model/Appointment.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\model\\Appointment.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/appointment/repo/AppointmentRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\repo\\AppointmentRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/main/java/com/example/MedQueue/patient/data/repository/PatientRepository.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\patient\\data\\repository\\PatientRepository.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "MedQueue/src/test/java/com/example/MedQueue/appointment/service/implementation/AppointmentServiceImplTest.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\test\\java\\com\\example\\MedQueue\\appointment\\service\\implementation\\AppointmentServiceImplTest.java",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    },
+                    {
+                        "path": "Dockerfile",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\Dockerfile",
+                        "sources": [
+                            "opened_tab"
+                        ]
+                    }
+                ],
+                "usedFilePaths": [
+                    {
+                        "path": "MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\model\\Appointment.java",
+                        "fsPath": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\model\\Appointment.java",
+                        "sources": [
+                            "opened_tab"
+                        ],
+                        "content": "package com.example.MedQueue.appointment.model;\r\n\r\nimport com.example.MedQueue.appointment.enums.AppointmentStatus;\r\nimport com.example.MedQueue.auth.enums.Role;\r\nimport com.google.auto.value.AutoValue;\r\nimport jakarta.persistence.*;\r\nimport lombok.*;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.LocalTime;\r\nimport java.util.UUID;\r\n\r\n@Data\r\n@NoArgsConstructor\r\n@AllArgsConstructor\r\n@Builder\r\n@Entity(name=\"appointment\")\r\n\r\n\r\npublic class Appointment {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.UUID)\r\n    private UUID id;\r\n\r\n    private String patientId;\r\n    private String doctorId;\r\n    private String description;\r\n    private LocalDate date;\r\n    private LocalTime time;\r\n    @Enumerated(EnumType.STRING)\r\n    @CollectionTable(name = \"appointment_status\", joinColumns = @JoinColumn(name = \"appointment_id\"))\r\n    @Column(name = \"appointmentStatus\")\r\n    private AppointmentStatus status;\r\n\r\n    public void cancel(String requestingPatientId) {\r\n        if (!this.patientId.equals(requestingPatientId)) {\r\n            throw new RuntimeException(\"Unauthorized cancel attempt.\");\r\n        }\r\n        if (this.status == AppointmentStatus.CANCELLED) {\r\n            throw new RuntimeException(\"Appointment already cancelled.\");\r\n        }\r\n        this.status = AppointmentStatus.CANCELLED;\r\n    }\r\n}\r\n"
+                    }
+                ]
+            },
+            "createdAt": 1754669225018,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "C:\\Users\\DELL\\Desktop\\javaProject\\MedQueue\\MedQueue\\src\\main\\java\\com\\example\\MedQueue\\appointment\\service\\implementation\\AppointmentServiceImpl.java:28:47"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "java: cannot find symbol"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "  symbol:   method builder()"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "  location: class com.example.MedQueue.appointment.model.Appointment"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "fix"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "132d0318-49de-41ec-8291-ae263ed41ae9",
+            "role": "system",
+            "content": [
+                {
+                    "type": "errorText",
+                    "text": "The chat request was not successful. Please try again later.",
+                    "allowRegenerate": true
+                }
+            ],
+            "createdAt": 1754669281010,
+            "isInternal": false
+        }
+    ],
+    "isAgent": false,
+    "isCustomAgent": false,
+    "isUnitTestsAgent": false,
+    "isE2EAgent": false,
+    "autoApply": false
+}
+}

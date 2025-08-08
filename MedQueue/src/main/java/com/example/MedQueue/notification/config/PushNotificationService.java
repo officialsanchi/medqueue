@@ -1,4 +1,4 @@
-package com.example.MedQueue.notification.service;
+package com.example.MedQueue.notification.config;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;

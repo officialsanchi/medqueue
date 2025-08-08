@@ -1,4 +1,4 @@
-package com.example.MedQueue.notification.service;
+package com.example.MedQueue.notification.config;
 
 
 import com.twilio.Twilio;

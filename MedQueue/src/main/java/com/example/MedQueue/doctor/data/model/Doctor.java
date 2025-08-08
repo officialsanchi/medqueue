@@ -13,6 +13,9 @@ import java.util.UUID;
 @Setter
 @Entity(name="doctors")
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "doctors")
 
 
 public class Doctor implements AppUser {
@@ -50,10 +53,13 @@ public class Doctor implements AppUser {
 
     @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
+    private String image;
+    @Column(nullable = false)
+    private String school;
+    @Column(nullable = false)
+    private String certification;
 
-    public Doctor() {
-
-    }
     public Doctor(UUID id, String fullName, String email, String password, int yearsOfExperience,
                   String phoneNumber, Set<Role> roles) {
         this.id = id;
@@ -125,4 +131,6 @@ public class Doctor implements AppUser {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+
 }

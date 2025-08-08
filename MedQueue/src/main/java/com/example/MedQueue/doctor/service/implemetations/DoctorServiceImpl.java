@@ -18,10 +18,13 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorRepository doctorRepository;
 
     @Override
-    public String registerDoctor(  UUID id ,String description, String fullName, String email, String password, int yearsOfExperience, String phoneNumber) {
+    public String registerDoctor(  UUID id ,String image,String school,String certification,String description, String fullName, String email, String password, int yearsOfExperience, String phoneNumber) {
         Doctor doctor = Doctor.builder()
                 .id( id)
                 .roles( Collections.singleton( Role.DOCTOR ) )
+                .image( image  )
+                .certification( certification )
+                .school(school)
                 .password(password)
                 .phoneNumber(phoneNumber)
                 .yearsOfExperience(yearsOfExperience)

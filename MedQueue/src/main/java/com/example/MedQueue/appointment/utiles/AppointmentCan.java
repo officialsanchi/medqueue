@@ -1,39 +1,22 @@
-package com.example.MedQueue.appointment.model;
+package com.example.MedQueue.appointment.utiles;
 
 import com.example.MedQueue.appointment.enums.AppointmentStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.UUID;
-
+@Getter
+@Setter
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Entity(name="appointment")
 
-
-public class Appointment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
-    private UUID patientId;
-    private UUID doctorId;
-    private String description;
-    private LocalDate date;
-    private LocalTime time;
+public class AppointmentCan {
+    private String patientId;
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "appointment_status", joinColumns = @JoinColumn(name = "appointment_id"))
     @Column(name = "appointmentStatus")
     private AppointmentStatus status;
-
-    public void cancel(UUID requestingPatientId) {
+    public void cancel(String requestingPatientId) {
         if (!this.patientId.equals(requestingPatientId)) {
             throw new RuntimeException("Unauthorized cancel attempt.");
         }

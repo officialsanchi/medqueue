@@ -1,4 +1,4 @@
-package com.example.MedQueue.notification.service;
+package com.example.MedQueue.notification.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;

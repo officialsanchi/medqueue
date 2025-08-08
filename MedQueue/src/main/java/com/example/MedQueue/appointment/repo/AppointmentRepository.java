@@ -7,16 +7,15 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface AppointmentRepository  extends JpaRepository<Appointment, UUID> {
-    boolean existsByDoctorIdAndDateAndTime(String doctorId, LocalDate date, LocalTime time);
-    boolean existsByPatientIdAndDate(String patientId, LocalDate date);
-    List<Appointment> findByPatientId(String patientId);
-    List<Appointment> findByDoctorIdAndDate(String doctorId, LocalDate date);
-    List<Appointment>findByDoctorId( String doctorId);
+public interface AppointmentRepository  extends JpaRepository<Appointment, UUID > {
+    boolean existsByDoctorIdAndDateAndTime(UUID doctorId, LocalDate date, LocalTime time);
+    boolean existsByPatientIdAndDate(UUID patientId, LocalDate date);
+    List<Appointment> findByPatientId(UUID patientId);
     List<Appointment> findByDoctorIdAndDate(UUID doctorId, LocalDate date);
+    List<Appointment>findByDoctorId( UUID doctorId);
 
-    List<Appointment> findByPatientIdOrderByDateDesc(UUID patientId);
 }
