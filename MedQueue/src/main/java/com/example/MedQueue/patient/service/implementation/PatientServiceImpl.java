@@ -6,8 +6,12 @@ import com.example.MedQueue.appointment.repo.AppointmentRepository;
 import com.example.MedQueue.auth.enums.Role;
 import com.example.MedQueue.patient.data.model.Patient;
 import com.example.MedQueue.patient.data.repository.PatientRepository;
+import com.example.MedQueue.patient.dtos.request.PatientRegisterRequest;
+import com.example.MedQueue.patient.dtos.responses.PatientRegisterResponses;
 import com.example.MedQueue.patient.service.interfaces.PatientService;
+import com.example.MedQueue.user.enums.Role;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,19 +26,24 @@ import java.util.UUID;
 public class PatientServiceImpl implements PatientService {
     private final PatientRepository patientRepository;
     private final AppointmentRepository appointmentRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
-    public String register(UUID id, String fullName, String email, String password, String phoneNumber) {
+    public PatientRegisterResponses registerPatient(PatientRegisterRequest patientRegisterRequest) {
         Patient patient = Patient.builder()
-                .id( id )
-                .roles( Collections.singleton( Role.PATIENT ) )
-                .fullName( fullName )
-                .email( email )
-                .password( password )
-                .phoneNumber( phoneNumber )
+                .id(UUID.randomUUID() )
+                .roles( Collections.singleton( Role.PATIENT )
+                .fullName( patientRegisterRequest.getFullName() )
+                .email( patientRegisterRequest.getEmail() )
+                .password( passwordEncoder.encode( patientRegisterRequest.getPassword() ) )
+                .phoneNumber( patientRegisterRequest.getPhoneNumber() )
                 .build();
         patientRepository.save( patient );
-        return "User registered successfully";
+
+        PatientRegisterResponses responses = new PatientRegisterResponses();
+        responses.setMessage("User registered successfully");
+        return responses;
+
     }
 
     @Override

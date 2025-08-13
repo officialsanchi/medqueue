@@ -26,8 +26,9 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
-!**/src/main/**/build/
+!**/src/main/**/build/ secret.properties
 !**/src/test/**/build/
+
 
 ### VS Code ###
 .vscode/

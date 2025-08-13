@@ -1,7 +1,8 @@
 package com.example.MedQueue.patient.data.model;
 
-import com.example.MedQueue.auth.enums.Role;
-import com.example.MedQueue.auth.models.AppUser;
+
+import com.example.MedQueue.user.enums.Role;
+import com.example.MedQueue.user.model.AppUser;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Patient  implements AppUser {
+public class Patient extends AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -37,7 +38,7 @@ public class Patient  implements AppUser {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
-    private Set<Role> roles;
+    private  Set<Role> roles = Set.of(Role.PATIENT);
 
     // Getters and Setters
 

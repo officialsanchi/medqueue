@@ -1,8 +1,8 @@
 package com.example.MedQueue.doctor.data.model;
 
-import com.example.MedQueue.auth.enums.Role;
-import com.example.MedQueue.auth.models.AppUser;
 import com.example.MedQueue.doctor.enums.Specialist;
+import com.example.MedQueue.user.enums.Role;
+import com.example.MedQueue.user.model.AppUser;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,10 +15,9 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "doctors")
 
 
-public class Doctor implements AppUser {
+public class Doctor extends AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", updatable = false, nullable = false)
@@ -43,7 +42,7 @@ public class Doctor implements AppUser {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
-    private Set<Role> roles;
+    private  Set<Role> roles = Set.of(Role.DOCTOR);
 
     @ElementCollection(targetClass = Specialist.class)
     @Enumerated(EnumType.STRING)
@@ -70,6 +69,8 @@ public class Doctor implements AppUser {
         this.phoneNumber = phoneNumber;
         this.roles = roles;
     }
+
+
 
 
     @Override

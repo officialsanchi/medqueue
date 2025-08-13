@@ -1,57 +1,54 @@
 package com.example.MedQueue.auth.jwt;
 
+import com.example.MedQueue.auth.config.AppUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    public JwtAuthenticationFilter(JwtService jwtService,
-                                   UserDetailsService userDetailsService) {
-        this.jwtService = jwtService;
-        this.userDetailsService = userDetailsService;
+    private final JwtUtil jwtUtil;
+    private final AppUserDetailsService userDetailsService;
+
+    private String extractToken(HttpServletRequest request) {
+        final String header = request.getHeader("Authorization");
+        if (header == null || !header.startsWith("Bearer ")) return null;
+        return header.substring(7);
     }
 
-    private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
-
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse resp, FilterChain chain)
             throws ServletException, IOException {
-        final String authHeader = request.getHeader("Authorization");
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
 
-        final String jwt = authHeader.substring(7);
-        final String email = jwtService.extractEmail(jwt);
-
-        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-            if (jwtService.isTokenValid(jwt, email)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails,
-                        null,
-                        userDetails.getAuthorities()
-                );
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+        String token = extractToken(req);
+        if (token != null) {
+            try {
+                String username = jwtUtil.extractUsername(token);
+                if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    var userDetails = userDetailsService.loadUserByUsername(username);
+                    if (jwtUtil.isTokenValid(token, userDetails.getUsername())) {
+                        var authorities = jwtUtil.extractRoles(token).stream()
+                                .map( SimpleGrantedAuthority::new).collect( Collectors.toList());
+                        var authToken = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
+                        SecurityContextHolder.getContext().setAuthentication(authToken);
+                    }
+                }
+            } catch (Exception ex) {
+                // invalid token -> do nothing: context remains unauthenticated
             }
         }
-        filterChain.doFilter(request, response);
+        chain.doFilter(req, resp);
     }
 }

@@ -1,16 +1,9 @@
 package com.example.MedQueue.user.service.implementation;
 
-import com.example.MedQueue.appointment.model.Appointment;
-import com.example.MedQueue.appointment.repo.AppointmentRepository;
 import com.example.MedQueue.auth.models.AppUser;
-import com.example.MedQueue.user.model.SystemSetting;
-import com.example.MedQueue.user.repository.SystemSettingRepository;
 import com.example.MedQueue.user.service.interfaces.AdminPanelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
